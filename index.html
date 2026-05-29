@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <title>Mini Project Azure Serverless</title>
+    <style>
+        body { font-family: 'Segoe UI', sans-serif; background: #f4f6f8; padding: 20px; }
+        .card { background: white; padding: 20px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); max-width: 500px; margin: auto; }
+        input, select, button { width: 100%; padding: 10px; margin-top: 10px; border-radius: 4px; border: 1px solid #ccc; box-sizing: border-box; }
+        button { background: #1f4e79; color: white; border: none; cursor: pointer; }
+        pre { background: #eee; padding: 10px; border-radius: 4px; overflow-x: auto; }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <h2>Estimasi Biaya Konsumsi</h2>
+        <p><b>Nayaka Ivana Putra (048)</b></p>
+        <label>Jumlah Peserta:</label>
+        <input type="number" id="jumlah" value="40">
+        <label>Jenis Paket:</label>
+        <select id="jenis">
+            <option value="snack">Snack (Rp15.000)</option>
+            <option value="makan">Makan (Rp30.000)</option>
+            <option value="lengkap">Lengkap (Rp45.000)</option>
+        </select>
+        <button onclick="hitung()">Hitung Estimasi</button>
+        <pre id="hasil">Hasil akan muncul di sini...</pre>
+    </div>
+
+    <script>
+        async function hitung() {
+            const jml = document.getElementById("jumlah").value;
+            const jns = document.getElementById("jenis").value;
+            // GANTI URL DI BAWAH INI NANTI
+            const url = `URL_FUNCTION_KAMU_DISINI?jumlah=${jml}&jenis=${jns}`;
+            
+            try {
+                const response = await fetch(url);
+                const data = await response.json();
+                document.getElementById("hasil").innerText = JSON.stringify(data, null, 2);
+            } catch (error) {
+                document.getElementById("hasil").innerText = "Error: " + error;
+            }
+        }
+    </script>
+</body>
+</html>
